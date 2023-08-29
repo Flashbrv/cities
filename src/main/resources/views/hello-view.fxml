@@ -11,9 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="pane" maxHeight="400.0" maxWidth="500.0" minHeight="185.0" minWidth="500.0"
-            prefHeight="185.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cities.helloWindow.HelloController">
+<BorderPane id="pane" maxHeight="400.0" maxWidth="500.0" minHeight="185.0" minWidth="500.0" prefHeight="185.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cities.helloWindow.HelloController">
    <top>
       <HBox prefHeight="26.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
@@ -28,13 +26,11 @@
             <Pane prefHeight="31.0" prefWidth="500.0" VBox.vgrow="ALWAYS" />
             <HBox prefHeight="16.0" prefWidth="500.0">
                <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="574.0" text="Вітаємо Вас у грі дитинства і всіх розумників!" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="574.0" text="%welcome" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                </children>
                <VBox.margin>
                   <Insets bottom="15.0" top="10.0" />
@@ -43,7 +39,7 @@
             <HBox prefHeight="16.0" prefWidth="500.0">
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="437.0" text="Для початку гри введіть ім'я:" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="437.0" text="%enter-name" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font>
@@ -67,7 +63,7 @@
             <HBox prefHeight="16.0" prefWidth="500.0">
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startButtonHandler" styleClass="custom-button" text="Почати" />
+                  <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startButtonHandler" styleClass="custom-button" text="%start-button" />
                   <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>

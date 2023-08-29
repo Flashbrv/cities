@@ -15,7 +15,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.util.Locale;
+
+import static com.example.cities.util.FXMLUtils.*;
 
 public class HelloController {
     @FXML
@@ -26,24 +28,40 @@ public class HelloController {
     private Button startBtn;
 
     private ObservableList<String> languages;
+    private Locale locale;
 
     public HelloController() {
-        languages = FXCollections.observableArrayList("UA", "USA");
+        languages = FXCollections.observableArrayList("UA", "US");
     }
 
     @FXML
     public void initialize() {
         cbLanguage.setItems(languages);
         cbLanguage.setCellFactory(c -> new LanguageListCell());
-        cbLanguage.setButtonCell(new LanguageListCell());
-        cbLanguage.getSelectionModel().selectFirst();
-        cbLanguage.setOnAction(event -> System.out.println(cbLanguage.getValue()));
+        cbLanguage.setOnAction(this::switchLanguage);
 
         playerName.setOnAction(this::startButtonHandler);
         playerName.requestFocus();
 
         startBtn.setOnAction(this::startButtonHandler);
     }
+
+    private void switchLanguage(ActionEvent event) {
+        locale = cbLanguage.getValue().equals("UA") ? new Locale("uk", "UA") : Locale.US;
+
+        FXMLLoader fxmlLoader = getLocalizedFXMLLoader("/views/hello-view.fxml", locale);
+        Parent root = loadRoot(fxmlLoader);
+
+        HelloController controller = fxmlLoader.getController();
+        controller.setLocale(locale);
+
+        Scene scene = createScene(root);
+        Stage stage = getStageFromEvent(event);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
 
     public void startButtonHandler(ActionEvent event) {
         if (playerName.getText().isBlank()) {
@@ -57,24 +75,23 @@ public class HelloController {
     }
 
     private Scene createMainWindowScene() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/views/main-view.fxml"));
-            Parent root = fxmlLoader.load();
+        FXMLLoader fxmlLoader = getLocalizedFXMLLoader("/views/main-view.fxml", locale);
+        Parent root = loadRoot(fxmlLoader);
 
-            MainController controller = fxmlLoader.getController();
-            controller.setPlayerName(playerName.getText());
+        MainController controller = fxmlLoader.getController();
+        controller.setPlayerName(playerName.getText());
 
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(this.getClass().getResource("/css/style.css").toExternalForm());
-
-            return scene;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return createScene(root);
     }
 
     private static Stage getStageFromEvent(ActionEvent event) {
         Node node = (Node) event.getSource();
         return  (Stage) node.getScene().getWindow();
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+        cbLanguage.getSelectionModel().select(locale.getCountry());
+        cbLanguage.setButtonCell(new LanguageListCell());
     }
 }
