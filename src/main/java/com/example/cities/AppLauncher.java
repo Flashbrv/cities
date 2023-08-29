@@ -18,7 +18,8 @@ public class AppLauncher extends Application {
     public void start(Stage stage) {
         Scene scene = loadScene();
         stage.setScene(scene);
-        stage.setTitle("Гра \"Міста\"");
+        ResourceBundle bundle = ResourceBundle.getBundle("languages.lang", new Locale("uk", "UA"));
+        stage.setTitle(bundle.getString("window-title"));
         stage.getIcons().add(loadIcon());
         stage.setResizable(false);
         stage.show();

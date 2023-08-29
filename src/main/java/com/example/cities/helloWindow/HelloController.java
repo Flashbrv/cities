@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static com.example.cities.util.FXMLUtils.*;
 
@@ -57,6 +58,8 @@ public class HelloController {
 
         Scene scene = createScene(root);
         Stage stage = getStageFromEvent(event);
+        ResourceBundle bundle = ResourceBundle.getBundle("languages.lang", locale);
+        stage.setTitle(bundle.getString("window-title"));
         stage.setScene(scene);
         stage.show();
     }
